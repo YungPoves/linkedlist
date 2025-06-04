@@ -63,6 +63,7 @@ template <class T> void LinkedList<T>::DeleteHead() {
   Node<T> *temp = this->head;
   this->head = head->next;
   delete temp;
+  temp = nullptr;
 }
 
 template <class T> void LinkedList<T>::PrintList() {
