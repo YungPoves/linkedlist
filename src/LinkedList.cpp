@@ -1,7 +1,10 @@
 #include "LinkedList.h"
 #include "Node.h"
+#include <memory>
 
-template <class T> LinkedList<T>::LinkedList() { this->head = nullptr; }
+template <class T> LinkedList<T>::LinkedList() {
+  std::make_unique<Node<T>>(this->head);
+}
 template <class T> LinkedList<T>::LinkedList(const LinkedList<T> &oldList) {
   // Node<T> *temp = new Node<T>(oldList.head);
   Node<T> *temp(oldList.head);
@@ -14,7 +17,7 @@ template <class T> LinkedList<T>::LinkedList(const LinkedList<T> &oldList) {
 template <class T> LinkedList<T>::LinkedList(const LinkedList<T> *oldList) {
   Node<T> *temp = new Node<T>(oldList->head);
 
-  while (temp != nullptr){
+  while (temp != nullptr) {
     this->AddNode(temp);
     temp = temp->next;
   }
