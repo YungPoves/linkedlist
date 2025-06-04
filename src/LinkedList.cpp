@@ -1,5 +1,6 @@
 #include "LinkedList.h"
 #include "Node.h"
+#include <iostream>
 
 template <class T> LinkedList<T>::LinkedList() { this->head = nullptr; }
 template <class T> LinkedList<T>::LinkedList(const LinkedList<T> &oldList) {
@@ -14,12 +15,15 @@ template <class T> LinkedList<T>::LinkedList(const LinkedList<T> &oldList) {
 template <class T> LinkedList<T>::LinkedList(const LinkedList<T> *oldList) {
   Node<T> *temp = new Node<T>(oldList->head);
 
-  while (temp != nullptr){
+  while (temp != nullptr) {
     this->AddNode(temp);
     temp = temp->next;
   }
 }
-template <class T> LinkedList<T>::~LinkedList() { this->ClearList(); }
+template <class T> LinkedList<T>::~LinkedList() {
+  std::cout << "Deleting list." << std::endl;
+  this->ClearList();
+}
 
 template <class T> void LinkedList<T>::AddNode(T data) {
   Node<T> *newNode = new Node<T>(data);
