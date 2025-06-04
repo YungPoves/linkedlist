@@ -1,12 +1,14 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
+#include <memory>
 #include "Node.h"
 
 template<typename T> class LinkedList
 {
   private:
   Node<T> *head;
+  std::unique_ptr<Node<T>> n();
 
   public:
   LinkedList();
