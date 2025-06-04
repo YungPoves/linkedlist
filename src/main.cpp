@@ -39,6 +39,7 @@ int main() {
 
   LinkedList<int> *t3 = new LinkedList<int>(t1);
   t3->PrintList();
+  t3->DeleteHead();
 
   return 0;
 }
