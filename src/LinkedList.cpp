@@ -3,66 +3,58 @@
 #include <iostream>
 
 template <class T> LinkedList<T>::LinkedList() : head(nullptr) {}
-template <class T> LinkedList<T>::LinkedList(const LinkedList<T> &oldList) : head(nullptr) {
-  Node<T> *temp(oldList.head);
 
-  while (temp != nullptr) {
-    this->AddNode(temp);
-    temp = temp->next;
-  }
-}
-// template <class T> LinkedList<T>::LinkedList(const LinkedList<T> *oldList) {
-//   Node<T> *temp = new Node<T>(oldList->head);
-
-//   while (temp != nullptr) {
-//     this->AddNode(temp);
-//     temp = temp->next;
-//   }
-// }
-template <class T> LinkedList<T>::~LinkedList() {
-  std::cout << "Deleting list." << std::endl;
-  this->ClearList();
-}
-
-template <class T> void LinkedList<T>::AddNode(T data) {
-  Node<T> *newNode = new Node<T>(data);
-  newNode->next = head;
-  head = newNode;
-}
-
-template <class T> void LinkedList<T>::AddNode(Node<T> node) {
-  Node<T> *newNode = new Node<T>(node);
-  newNode->next = head;
-  head = newNode;
-}
-
-template <class T> void LinkedList<T>::AppendNode(T data) {
-  Node<T> *newNode = new Node<T>(data);
-
-  if (this->head == nullptr) {
-    head = newNode;
+template <class T>
+LinkedList<T>::LinkedList(const LinkedList<T> &oldList) : head(nullptr) {
+  if (oldList.head == nullptr) {
+    head = nullptr;
     return;
   }
 
+  Node<T> *temp = oldList.head;
+
+  while (temp != nullptr) {
+    PushBack(temp->data);
+	temp = temp->next;
+  }
+}
+
+template <class T> LinkedList<T>::~LinkedList() {
+  std::cout << "Deleting list." << std::endl;
+
   Node<T> *temp = new Node<T>();
+
+  while (head != nullptr) {
+    temp = head;
+    head = head->next;
+    delete temp;
+  }
+
+  temp = nullptr;
+}
+
+template <class T> void LinkedList<T>::PushFront(const T &value) {
+  Node<T> *newNode = new Node<T>(value);
+  newNode->next = head;
+  head = newNode;
+
+  newNode = nullptr;
+}
+
+template <class T> void LinkedList<T>::PushBack(const T &value) {
+  Node<T> *newNode = new Node<T>(value);
+  Node<T> *temp = new Node<T>();
+
+  if (this->head == nullptr) {
+    this->head = new Node<T>(value);
+    return;
+  }
   temp = this->head;
 
   while (temp->next != nullptr) {
     temp = temp->next;
   }
   temp->next = newNode;
-}
-
-template <class T> void LinkedList<T>::DeleteHead() {
-  if (this->head == nullptr) {
-    std::cout << "List is empty." << std::endl;
-    return;
-  }
-
-  Node<T> *temp = this->head;
-  this->head = head->next;
-  delete temp;
-  temp = nullptr;
 }
 
 template <class T> void LinkedList<T>::PrintList() {
@@ -75,36 +67,7 @@ template <class T> void LinkedList<T>::PrintList() {
     std::cout << " -> " << temp->data;
     temp = temp->next;
   }
-  std::cout << std::endl;
-}
-
-template <class T> void LinkedList<T>::ClearList() {
-  if (this->head == nullptr)
-    return;
-
-  Node<T> *temp = this->head;
-
-  while (temp != nullptr) {
-    if (temp != nullptr) {
-      this->DeleteHead();
-      temp = this->head;
-    }
-  }
-}
-
-template <class T> int LinkedList<T>::GetLength() {
-  int count = 1;
-  Node<T> *temp = this->head;
-
-  if (temp == nullptr)
-    return 0;
-
-  while (temp->next != nullptr) {
-    count++;
-    temp = temp->next;
-  }
-
-  return count;
+  std::cout << " -> TAIL" << std::endl;
 }
 
 template class LinkedList<int>;

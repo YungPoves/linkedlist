@@ -3,23 +3,17 @@
 
 #include "Node.h"
 
-template<typename T> class LinkedList
-{
-  private:
+template <typename T> class LinkedList {
+private:
   Node<T> *head;
 
-  public:
+public:
   LinkedList();
-  LinkedList(const LinkedList &t);
-  LinkedList(const LinkedList *t);
+  LinkedList(const LinkedList &oldList);
   ~LinkedList();
-  void AddNode(T data);
-  void AddNode(Node<T> node);
-  void AppendNode(T data);
-  void DeleteHead();
+  void PushFront(const T &value);
+  void PushBack(const T &value);
   void PrintList();
-  void ClearList();
-  int GetLength();
 };
 
 #endif
