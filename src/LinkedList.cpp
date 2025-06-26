@@ -35,6 +35,12 @@ template <class T> LinkedList<T>::~LinkedList() {
 
 template <class T> void LinkedList<T>::PushFront(const T &value) {
   Node<T> *newNode = new Node<T>(value);
+
+  if (this->head == nullptr) {
+    this->head = newNode;
+    return;
+  }
+
   newNode->next = head;
   head = newNode;
 
