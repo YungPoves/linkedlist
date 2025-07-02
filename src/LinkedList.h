@@ -11,6 +11,7 @@ public:
   LinkedList();
   LinkedList(const LinkedList &oldList);
   ~LinkedList();
+  LinkedList &operator=(const LinkedList &t);
   void PushFront(const T &value);
   void PushBack(const T &value);
   void PrintList();

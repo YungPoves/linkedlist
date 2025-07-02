@@ -15,7 +15,7 @@ LinkedList<T>::LinkedList(const LinkedList<T> &oldList) : head(nullptr) {
 
   while (temp != nullptr) {
     PushBack(temp->data);
-	temp = temp->next;
+    temp = temp->next;
   }
 }
 
@@ -31,6 +31,23 @@ template <class T> LinkedList<T>::~LinkedList() {
   }
 
   temp = nullptr;
+}
+
+template <class T>
+LinkedList<T> &LinkedList<T>::operator=(const LinkedList<T> &t) {
+  if (t.head == nullptr) {
+    return *this;
+  }
+
+  Node<T> *temp = new Node<T>();
+  temp = t.head;
+
+  while (temp != nullptr) {
+    this->PushBack(temp->data);
+    temp = temp->next;
+  }
+
+  return *this;
 }
 
 template <class T> void LinkedList<T>::PushFront(const T &value) {
