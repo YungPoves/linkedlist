@@ -2,12 +2,14 @@
 #include "Node.h"
 #include <iostream>
 
-template <class T> LinkedList<T>::LinkedList() : head(nullptr) {}
+template <class T> LinkedList<T>::LinkedList() : head(nullptr), size(0) {}
 
 template <class T>
-LinkedList<T>::LinkedList(const LinkedList<T> &oldList) : head(nullptr) {
+LinkedList<T>::LinkedList(const LinkedList<T> &oldList) : head(nullptr), size(0) {
   if (oldList.head == nullptr) {
     head = nullptr;
+    size = oldList.size;
+
     return;
   }
 
@@ -55,11 +57,14 @@ template <class T> void LinkedList<T>::PushFront(const T &value) {
 
   if (this->head == nullptr) {
     this->head = newNode;
+    size++;
+
     return;
   }
 
   newNode->next = head;
   head = newNode;
+  size++;
 
   newNode = nullptr;
 }
@@ -70,6 +75,8 @@ template <class T> void LinkedList<T>::PushBack(const T &value) {
 
   if (this->head == nullptr) {
     this->head = new Node<T>(value);
+    size++;
+
     return;
   }
   temp = this->head;
@@ -78,6 +85,7 @@ template <class T> void LinkedList<T>::PushBack(const T &value) {
     temp = temp->next;
   }
   temp->next = newNode;
+  size++;
 }
 
 template <class T> void LinkedList<T>::PrintList() {

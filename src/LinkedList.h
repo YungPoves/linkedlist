@@ -6,6 +6,7 @@
 template <typename T> class LinkedList {
 private:
   Node<T> *head;
+  int size;
 
 public:
   LinkedList();
